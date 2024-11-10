@@ -110,6 +110,9 @@ class DayView<T extends Object?> extends StatefulWidget {
   /// for particular day.
   final EventController<T>? controller;
 
+  /// PageController for DayView
+  final PageController? pageController;
+
   /// Defines height occupied by one minute of interval.
   /// This will be used to calculate total height of day view.
   final double heightPerMinute;
@@ -230,6 +233,7 @@ class DayView<T extends Object?> extends StatefulWidget {
     this.dateStringBuilder,
     this.timeStringBuilder,
     this.controller,
+    this.pageController,
     this.showVerticalLine = true,
     this.pageTransitionDuration = const Duration(milliseconds: 300),
     this.pageTransitionCurve = Curves.ease,
@@ -356,7 +360,7 @@ class DayViewState<T extends Object?> extends State<DayView<T>> {
     _scrollController = ScrollController(
       initialScrollOffset: _lastScrollOffset,
     );
-    _pageController = PageController(initialPage: _currentIndex);
+    _pageController = widget.pageController ?? PageController(initialPage: _currentIndex);
     _eventArranger = widget.eventArranger ?? SideEventArranger<T>();
     _assignBuilders();
   }
